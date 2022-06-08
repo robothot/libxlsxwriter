@@ -216,9 +216,10 @@ enable_language(CXX)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 # ZLIB
-find_package(ZLIB REQUIRED "1.0")
-list(APPEND LXW_PRIVATE_INCLUDE_DIRS ${ZLIB_INCLUDE_DIRS})
-message("zlib version: " ${ZLIB_VERSION})
+# find_package(ZLIB REQUIRED "1.0")
+# list(APPEND LXW_PRIVATE_INCLUDE_DIRS ${ZLIB_INCLUDE_DIRS})
+# message("zlib version: " ${ZLIB_VERSION})
+add_subdirectory(third_party/zlib)
 
 # MINIZIP
 if (USE_SYSTEM_MINIZIP)
@@ -278,7 +279,7 @@ target_sources(${PROJECT_NAME}
     PRIVATE ${LXW_SOURCES}
     PUBLIC ${LXW_HEADERS}
 )
-target_link_libraries(${PROJECT_NAME} LINK_PUBLIC ${ZLIB_LIBRARIES} ${MINIZIP_LIBRARIES} ${LIB_CRYPTO} ${OPENSSL_CRYPTO_LIBRARY})
+target_link_libraries(${PROJECT_NAME} LINK_PUBLIC  ${MINIZIP_LIBRARIES} ${LIB_CRYPTO} ${OPENSSL_CRYPTO_LIBRARY})
 target_compile_definitions(${PROJECT_NAME} PRIVATE ${LXW_PRIVATE_COMPILE_DEFINITIONS})
 
 # /utf-8 needs VS2015 Update 2 or above.
